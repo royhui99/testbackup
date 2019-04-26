@@ -1,0 +1,65 @@
+<%=person.id %>ggggg
+<%=person.EventName %>
+<br>
+<button type="button" onclick="regi(<%= person.id%>)" class="btn btn-primary" <%=req.session.role=="student"
+    ?"":"hidden"%> >regi</button>
+<button type="button" onclick="remo(<%= person.id%>)" class="btn btn-danger" <%=req.session.role=="student"
+    ?"":"hidden"%> >regi</button>
+</br>
+
+
+<script>
+    async function regi(cid) {
+        ///user/:id/:association/add/:fk.
+
+        var r = confirm("Confirm regi?");
+        if (r == true) {
+
+            var response = await fetch("/user/<%= req.session.uid %>/regi/add/" + cid, {
+                method: "GET",
+                credentials: 'same-origin',
+            });
+
+            console.log(response);
+
+            if (response.status == 200) {
+                var data = await response.json();
+                alert("chenggong");
+            } else {
+                alert(response.statusText);
+            }
+
+        } else {
+            alert("cancelled");
+        }
+
+    };
+
+    async function remo(cid) {
+        ///user/:id/:association/add/:fk.
+
+        var r = confirm("Confirm regi?");
+        if (r == true) {
+
+            var response = await fetch("/user/<%= req.session.uid %>/regi/remove/" + cid, {
+                method: "GET",
+                credentials: 'same-origin',
+            });
+
+            console.log(response);
+
+            if (response.status == 200) {
+                var data = await response.json();
+                alert("chenggong");
+            } else {
+                alert(response.statusText);
+            }
+
+        } else {
+            alert("cancelled");
+        }
+
+    };
+
+
+</script>

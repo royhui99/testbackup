@@ -1,0 +1,69 @@
+<!--create.ejs-->
+<!-- 11111 -->
+<form action="/person/create" method="POST">
+    <div class="row">
+        <div class="col-6">
+            <label>Event name:</label>
+            <input type="text" class="form-control" name="Person[EventName]" required>
+
+
+
+            <label>Short Description:</label>
+            <textarea rows="4" class="form-control" name="Person[ShortDescription]"></textarea>
+
+
+            <label>Full Description:</label>
+            <textarea rows="7" class="form-control" name="Person[FullDescription]"></textarea>
+        </div>
+
+        <div class="col-6">
+            <label>Image URL:</label>
+            <input type="text" class="form-control" name="Person[IamgeURL]" required>
+
+            <br>
+            <label>Organizer:</label>
+            <br>
+            <select  name="Person[Origanizer]">
+                <option value="please pick up one:">please pick up one:</option>
+                <option value="SU">SU</option>
+                <option value="SA">SA</option>
+                <option value="Student">Student</option> 
+                <option value="Staff">Staff</option>
+            </select>
+            </br></br>
+
+            <label>Event Date:</label>
+            <input type="text" class="form-control datepicker" name="Person[EventDate]" required> 
+
+
+
+            <label>Time</label>
+            <input type="string" class="form-control" id="123" name="Person[Time]" required>
+
+            <br>
+            <label>Venue:</label>
+            <br>
+            <select  name="Person[Venue]">
+                <option value="please pick up one:">please pick up one:</option>
+                <option value="AAB201">AAB201</option>
+                <option value="OEE601">OEE601</option>
+                <option value="SWT501">SWT501</option> 
+                <option value="FSC501">FSC501</option>
+            </select>
+            </br></br>
+
+            <label>Quota:</label>
+            <input type="number" class="form-control" name="Person[Quota]" required> 
+
+            <input name="Person[Box]" type="checkbox" value="Highlighted" checked>
+            <label>Highlighted Event</label>
+
+            <br>
+            <button type="submit" class="btn btn-primary">Submit</button>
+            </br>
+        </div>
+    </div>
+</form>    
+<script>
+        document.getElementById("Create").className += " active";
+    </script>

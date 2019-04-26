@@ -1,0 +1,45 @@
+<table class="table table-striped">
+    <% eList.forEach( function(model) { %>
+    <tr>
+        <td>
+            <%= model.id %>
+        </td>
+        <td><a href="/person/view/<%=model.id %>">
+                <%= model.EventName %></a></td>
+        <td><a class="btn btn-primary" href="/person/update/<%=model.id %>">up</a></td>
+        <td><a class="btn btn-danger" onclick="myDel(<%= model.id %>)">del</a></td>
+        <td><a class="btn btn-primary" href="/person/<%=model.id %>/have">regi</a></td>
+    </tr>
+    <% }); %>
+</table>
+
+<script>
+    async function myDel(id) {
+
+        var dr = document.getElementById("deleteResult");
+
+        var r = confirm("Confirm Delete?");
+        if (r == true) {
+
+            var response = await fetch("/person/" + id, {
+                method: "DELETE",
+                credentials: 'same-origin',
+            });
+
+            console.log(response);
+
+            if (response.status == 200) {
+                var data = await response.json();
+                location.replace("/person/admin");
+                dr.innerHTML = data;
+            } else {
+                dr.innerHTML = response.statusText;
+            }
+
+        } else {
+            dr.innerHTML = "cancelled";
+        }
+
+    };
+
+</script>

@@ -1,0 +1,106 @@
+
+
+
+<!--create.ejs-->
+<!-- 11111 -->
+<form action="/person/update/<%= person.id%>" method="POST">
+    <div class="row">
+        <div class="col-6">
+            <label>Event name:</label>
+            <input type="text" class="form-control" name="Person[EventName]" value="<%= person.EventName %>" required>
+
+
+
+            <label>Short Description:</label>
+            <textarea rows="4" class="form-control" name="Person[ShortDescription]" ><%= person.ShortDescription %></textarea>
+
+
+            <label>Full Description:</label>
+            <textarea rows="7" class="form-control" name="Person[FullDescription]" ><%= person.FullDescription %></textarea>
+        </div>
+
+        <div class="col-6">
+            <label>Image URL:</label>
+            <input type="text" class="form-control" name="Person[IamgeURL]" value="<%= person.IamgeURL %>" required>
+
+            <br>
+            <label>Organizer:</label>
+            <br>
+            <select  name="Person[Origanizer]">
+                <option value="please pick up one:">please pick up one:</option>
+                <option value="SU" <%= person.Origanizer=="SU"?"selected":"" %>>SU</option>
+                <option value="SA" <%= person.Origanizer=="SA"?"selected":"" %></option>>SA</option>
+                <option value="Student" <%= person.Origanizer=="Student"?"selected":"" %></option>>Student</option> 
+                <option value="Staff" <%= person.Origanizer=="Staff"?"selected":"" %></option>>Staff</option>
+            </select>
+            </br></br>
+
+            <label>Event Date:</label>
+            <input type="text" class="form-control datepicker" name="Person[EventDate]" value="<%= person.EventDate.getMonth()+ 1  %>/<%= person.EventDate.getDate() %>/<%= person.EventDate.getFullYear() %>"  required> 
+
+
+
+            <label>Time</label>
+            <input type="time" class="form-control" id="123" name="Person[Time]"value="<%= person.Time %>" required>
+
+            <br>
+            <label>Venue:</label>
+            <br>
+            <select  name="Person[Venue]" required>
+                <option value="please pick up one:">please pick up one:</option>
+                <option value="AAB201"<%= person.Origanizer=="AAB201"?"selected":"" %>>AAB201</option>
+                <option value="OEE601" <%= person.Origanizer=="OEE601"?"selected":"" %>>OEE601</option>
+                <option value="SWT501">SWT501</option> 
+                <option value="FSC501">FSC501</option>
+            </select>
+            </br></br>
+
+            <label>Quota:</label>
+            <input type="number" class="form-control" name="Person[Quota]" required> 
+
+            <input name="Person[Box]" type="checkbox" value="Highlighted" <%= person.Box=="Highlighted"?"checked":"" %>>
+            <label>Highlighted Event</label>
+
+            <br>
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="delete" class="btn btn-primary" onclick="deletePerson('<%= person.id %>')">delete</button>
+            <div id="deleteResult"></div>
+            
+            </br>
+        </div>
+    </div>
+</form>    
+<script>
+        document.getElementById("Create").className += " active";
+    </script>
+<script>
+
+    async function deletePerson(id) {
+
+        var dr = document.getElementById("deleteResult");
+
+        var r = confirm("Confirm Delete?");
+        if (r == true) {
+
+            var response = await fetch("/person/" + id, {
+                method: "DELETE",
+                credentials: 'same-origin',
+            });
+
+            console.log(response);
+            
+            if (response.status == 200) {
+                var data = await response.json();
+                location.replace("/person/admin");
+                dr.innerHTML = data;
+            } else {
+                dr.innerHTML = response.statusText;
+            }
+
+        } else {
+            dr.innerHTML = "cancelled";
+        }
+
+    };
+
+</script>

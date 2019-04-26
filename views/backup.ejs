@@ -1,0 +1,34 @@
+<!--index.ejs-->
+<table class="table">
+        <tr>
+                
+                <td>EventName</td><td>ShortDescription</td>
+                <td>FullDescription %></td><td>IamgeURL %></td>
+                <td>Origanizer %></td><td>EventDate %></td>
+                <td>Time %></td><td>Venue %></td>
+                <td>Quota %></td><td>Box %></td>
+            
+            
+            
+            
+            </tr>
+        <% persons.forEach( function(model) { %>
+            
+            <tr>
+                
+                <td><%= model.EventName %></td><td><%= model.ShortDescription %></td>
+                <td><%= model.FullDescription %></td><td><%= model.IamgeURL %></td>
+                <td><%= model.Origanizer %></td><td><%= model.EventDate %></td>
+                <td><%= model.Time %></td><td><%= model.Venue %></td>
+                <td><%= model.Quota %></td><td><%=model.Box %></td>
+            
+            
+            
+            
+            </tr>
+        <% }); %>
+    </table>
+
+    <script>
+            document.getElementById("home").className += " active";
+        </script>

@@ -1,0 +1,163 @@
+<!--create.ejs-->
+<!-- 11111 -->
+<!-- <form action="/person/search" method="GET">
+    <div class="row">
+
+        <div class="col-6">
+
+
+                <% const current = parseInt(req.query.page) || 1; %>
+
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination">
+                        <li class="page-item">
+                            <a class="page-link" href="/person/search/?<%= param%>&page=<%= Math.max(current-1, 1) %>">Previous</a>
+                        </li>
+                
+                        <% for (i = 1; i <= count; i++) { %>
+                            <li class="page-item">
+                                <a class="page-link" href="/person/search/?<%= param%>&page=<%= i %>"><%= i %></a>
+                            </li>
+                        <% } %>
+                
+                        <li class="page-item">
+                            <a class="page-link" href="/person/search/?<%= param%>&page=<%= Math.min(current+1, count) %>">Next</a>
+                        </li>
+                    </ul>
+                </nav>
+
+
+                <div class="row">
+            <% person.forEach( function(model) { %>
+
+            <div class="card col-6">
+
+                <a href="/person/view/<%= model.id %>">
+                    <%=model.EventName %>
+                </a>
+                <div class="row">
+                    <div class="card col-6">
+                        <img src="<%= model.IamgeURL %>" style="width:100%">
+
+                    </div>
+                    <div class="card col-6">
+                        <%= model.ShortDescription %>
+                    </div>
+                </div>
+            </div>
+
+            <% }); %>
+        </div>
+    </div>
+
+
+
+        <div class="col-6">
+            <label>Event name:</label>
+            <input type="text" class="form-control" name="eName" value="<%= query.eName%>" > 
+
+            <br>
+            <label>Organizer:</label>
+            <br>
+            <select name="eOrg">
+                <option value="">please pick up one:</option>
+                <option value="SU" <%= query.eOrg=="SU"?"selected":""%>>SU</option>
+                <option value="SA" <%= query.eOrg=="SA"?"selected":""%>>SA</option>
+                <option value="Student" <%= query.eOrg=="Student"?"selected":"" %>>Student</option>
+                <option value="Staff" <%= query.eOrg=="Staff"?"selected":""%>>Staff</option>
+            </select>
+            </br></br>
+            
+            <label>AEvent Date:</label>
+            <input type="text" class="form-control datepicker" name="sDate" value="<%= query.sDate%>">
+
+            <label>BEvent Date:</label>
+            <input type="text" class="form-control datepicker" name="eDate" value="<%= query.eDate%>" > 
+
+            <br>
+            <label>Venue:</label>
+            <br>
+            <select name="venue">
+                <option value="">please pick up one:</option>
+                <option value="AAB201" <%= query.venue=="AAB201"?"selected":""%>>AAB201</option>
+                <option value="OEE601" <%= query.venue=="OEE601"?"selected":""%>>OEE601</option>
+                <option value="SWT501" <%= query.venue=="SWT501"?"selected":""%>>SWT501</option>
+                <option value="FSC501" <%= query.venue=="FSC501"?"selected":""%>>FSC501</option>
+            </select>
+            </br></br>
+
+            <br>
+            <button type="submit" class="btn btn-primary">Submit</button>
+            </br>
+        </div>
+    </div>
+
+
+</form> -->
+
+<div class="row">
+    <div class="col-3">
+
+    </div>
+    <div class="col-6">
+        <form action="/user/login" method="POST" onsubmit="submitForm(this);return false">
+
+            <div class="form-group">
+                <label for="exampleInputEmail1">Username</label>
+                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                    placeholder="Enter email" name="username" required>
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputPassword1">Password</label>
+                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="password"
+                    required>
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputPassword2">Password again</label>
+                <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Password" name="password2"
+                    required>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Create ac</button>
+        </form>
+    </div>
+</div>
+
+
+
+
+<script>
+    async function submitForm(oFormElement) {
+
+        var response = await fetch(oFormElement.action, {
+            method: oFormElement.method,
+            credentials: 'same-origin',
+            body: new FormData(oFormElement),
+        });
+
+        var logincount = 0;
+
+
+        if (response.redirected) {
+            window.location = response.url;
+        } else if (response.status == 200) {
+            var data = await response.json();
+            alert(data);
+            location.reload(true);
+        } else if (response.status == 401) {
+            var data = await response.text();
+            alert(data);
+        } else {
+            alert(response.statusText);
+        }
+
+    };
+
+</script>
+
+
+<script>
+    document.getElementById("Search").className += " active";
+</script>
